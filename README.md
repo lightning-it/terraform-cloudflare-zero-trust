@@ -2,7 +2,9 @@
 
 <!-- BEGIN LIT_QUALITY_BADGES -->
 
+[![CI](https://github.com/lightning-it/terraform-cloudflare-zero-trust/actions/workflows/repository-quality.yml/badge.svg?branch=develop)](https://github.com/lightning-it/terraform-cloudflare-zero-trust/actions/workflows/repository-quality.yml)
 [![Latest Release](https://img.shields.io/github/v/release/lightning-it/terraform-cloudflare-zero-trust?sort=semver)](https://github.com/lightning-it/terraform-cloudflare-zero-trust/releases/latest)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/lightning-it/terraform-cloudflare-zero-trust/badge)](https://scorecard.dev/viewer/?uri=github.com/lightning-it/terraform-cloudflare-zero-trust)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 <!-- END LIT_QUALITY_BADGES -->
