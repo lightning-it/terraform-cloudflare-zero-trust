@@ -1,5 +1,41 @@
 # terraform-cloudflare-zero-trust
 
+<!-- BEGIN LIT_QUALITY_BADGES -->
+
+[![Latest Release](https://img.shields.io/github/v/release/lightning-it/terraform-cloudflare-zero-trust?sort=semver)](https://github.com/lightning-it/terraform-cloudflare-zero-trust/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
+<!-- END LIT_QUALITY_BADGES -->
+
+<!-- BEGIN LIT_SHARED_RELEASE_MODEL -->
+
+## Release and Quality Model
+
+This repository follows the Lightning IT shared release and quality model.
+
+See [RELEASE.md](./RELEASE.md) for:
+
+- branch and release flow
+- required quality checks
+- test matrix
+- release evidence
+- artifact publishing
+- supported repository-specific release behavior
+
+Repository classification: **Terraform Module**.
+Required test profiles: `pre-commit, terraform-fmt, terraform-validate, docs`.
+Publishing targets: `terraform-registry`.
+
+## Supported and Tested Platforms
+
+| Platform / Product  |                  Status | Validation         |
+| ------------------- | ----------------------: | ------------------ |
+| ubuntu-latest       |               Supported | Terraform validate |
+| terraform           | Tested where applicable | Terraform validate |
+| cloudflare-provider | Tested where applicable | Terraform validate |
+
+<!-- END LIT_SHARED_RELEASE_MODEL -->
+
 Reusable Terraform module for Cloudflare Zero Trust Access applications and
 their ordered policies.
 
