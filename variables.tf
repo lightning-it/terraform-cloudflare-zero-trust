@@ -55,13 +55,38 @@ variable "access_policies" {
 variable "access_applications" {
   description = "Cloudflare Access applications keyed by a stable caller-defined identifier."
   type = map(object({
-    name             = string
-    domain           = string
-    type             = optional(string, "self_hosted")
-    session_duration = optional(string, "24h")
-    policy_keys      = list(string)
+    name                      = string
+    domain                    = string
+    type                      = optional(string, "self_hosted")
+    session_duration          = optional(string, "24h")
+    policy_keys               = list(string)
+    public_destinations       = optional(list(string))
+    allowed_idps              = optional(set(string))
+    auto_redirect_to_identity = optional(bool)
   }))
   default = {}
+
+  validation {
+    condition = alltrue([
+      for application in values(var.access_applications) :
+      application.public_destinations == null ? true : (
+        length(application.public_destinations) > 0 &&
+        length(application.public_destinations) == length(distinct(application.public_destinations)) &&
+        contains(application.public_destinations, application.domain)
+      )
+    ])
+    error_message = "Explicit public destinations must be non-empty, unique, and include the primary domain."
+  }
+
+  validation {
+    condition = alltrue([
+      for application in values(var.access_applications) :
+      application.auto_redirect_to_identity == true ? (
+        application.allowed_idps == null ? false : length(application.allowed_idps) == 1
+      ) : true
+    ])
+    error_message = "Automatic identity redirect requires exactly one explicit allowed identity provider."
+  }
 
   validation {
     condition = alltrue([

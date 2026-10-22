@@ -1,0 +1,29 @@
+name: Access module regression tests
+
+on:
+  pull_request:
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Test mocked Access plans in pinned Devtools
+        env:
+          WUNDER_DEVTOOLS_NETWORK: bridge
+        run: |
+          scripts/wunder-devtools-ee.sh bash -c '
+            set -euo pipefail
+            cp -R /workspace /tmp/wunder/module
+            cd /tmp/wunder/module
+            terraform init -backend=false -input=false
+            terraform test -no-color
+          '
