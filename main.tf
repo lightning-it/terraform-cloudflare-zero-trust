@@ -19,6 +19,11 @@ resource "cloudflare_zero_trust_access_application" "this" {
   domain           = each.value.domain
   type             = each.value.type
   session_duration = each.value.session_duration
+  destinations = each.value.public_destinations == null ? null : [
+    for uri in each.value.public_destinations : { type = "public", uri = uri }
+  ]
+  allowed_idps              = each.value.allowed_idps
+  auto_redirect_to_identity = each.value.auto_redirect_to_identity
 
   policies = [
     for index, policy_key in each.value.policy_keys : {

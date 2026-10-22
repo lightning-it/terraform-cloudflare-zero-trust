@@ -95,6 +95,13 @@ module "zero_trust" {
 
 The order of `policy_keys` defines policy precedence starting at `1`.
 
+Applications may set `public_destinations` to manage their complete public
+hostname/path list using the provider's `destinations` field. The list must
+include `domain`; omitting it preserves the provider's existing behavior.
+Use an explicit `allowed_idps` set to restrict the login choices.
+`auto_redirect_to_identity = true` requires exactly one allowed IdP.
+These login choices do not replace the group selectors in the access policies.
+
 ## Ownership boundaries
 
 The calling root module is responsible for:
